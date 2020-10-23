@@ -35,7 +35,8 @@
 #' @importFrom shinyWidgets prettyToggle
 #'
 #' @example examples/esquisse-module.R
-esquisserUI <- function(id, header = TRUE,
+esquisserUI <- function(id, 
+                        header = TRUE,
                         container = esquisseContainer(),
                         choose_data = TRUE, 
                         insert_code = FALSE,
@@ -43,8 +44,15 @@ esquisserUI <- function(id, header = TRUE,
   
   ns <- NS(id)
   
+  button_data <- actionButton(
+    inputId = ns("launch_import"), 
+    label = "Data",
+    icon = icon("database"), 
+    class = "btn-sm"
+  )
+  
   box_title <- tags$div(
-    class="gadget-title dreamrs-title-box",
+    class = "gadget-title dreamrs-title-box",
     tags$h1(shiny::icon("wrench"), "ggplot2 builder", class = "dreamrs-title"),
     tags$div(
       class = "pull-right",
@@ -53,16 +61,15 @@ esquisserUI <- function(id, header = TRUE,
     if (isTRUE(choose_data) & isTRUE(header)) {
       tags$div(
         class = "pull-left",
-        chooseDataUI(id = ns("choose-data"), class = "btn-sm")
+        button_data
       )
     }
   )
     
   addin <- miniPage(
 
-    # style sheet
+    html_dependency_esquisse(),
     singleton(x = tagList(
-      tags$link(rel="stylesheet", type="text/css", href="esquisse/styles.css"),
       tags$script(src = "esquisse/clipboard/clipboard.min.js")
     )),
 
@@ -86,7 +93,7 @@ esquisserUI <- function(id, header = TRUE,
             dropWidth = "290px",
             width = "100%"
           ),
-          if (isTRUE(choose_data) & !isTRUE(header)) chooseDataUI(id = ns("choose-data"))
+          if (isTRUE(choose_data) & !isTRUE(header)) button_data
         )
       ),
       column(

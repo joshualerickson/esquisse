@@ -15,7 +15,7 @@
 #' @importFrom ggplot2 ggplot_build ggsave
 #' @import ggplot2
 #' @importFrom rlang expr_deparse
-#'
+#' @importFrom datamods import_modal import_server
 esquisserServer <- function(input,
                             output,
                             session,
@@ -23,22 +23,29 @@ esquisserServer <- function(input,
                             dataModule = c("GlobalEnv", "ImportFile"),
                             sizeDataModule = "m") {
 
+  ns <- session$ns
   ggplotCall <- reactiveValues(code = "")
-
+  dataChart <- reactiveValues(data = NULL, name = NULL)
   observeEvent(data$data, {
     dataChart$data <- data$data
     dataChart$name <- data$name
   }, ignoreInit = FALSE)
-
-  dataChart <- callModule(
-    module = chooseDataServer,
-    id = "choose-data",
-    data = isolate(data$data),
-    name = isolate(data$name),
-    launchOnStart = is.null(isolate(data$data)),
-    coerceVars = getOption(x = "esquisse.coerceVars", default = FALSE),
-    dataModule = dataModule, size = sizeDataModule
-  )
+ 
+  if (is.null(isolate(data$data))) {
+    import_modal(ns("import"), from = c("env", "file", "copypaste"))
+  }
+  
+  observeEvent(input$launch_import, {
+    import_modal(ns("import"), from = c("env", "file", "copypaste"))
+  })
+  
+  imported <- import_server(id = "import")
+  
+  observeEvent(imported(), {
+    dataChart$data <- imported()
+    dataChart$name <- "data_imported"
+  })
+  
   observeEvent(dataChart$data, {
     if (is.null(dataChart$data)) {
       updateDragulaInput(

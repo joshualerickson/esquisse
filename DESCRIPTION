@@ -1,7 +1,7 @@
 Package: esquisse
 Type: Package
 Title: Explore and Visualize Your Data Interactively
-Version: 0.3.1
+Version: 0.3.1.900
 Authors@R: c(person("Fanny", "Meyer", role = c("aut")),
   person("Victor", "Perrier", email = "victor.perrier@dreamrs.fr", role = c("aut", "cre")),
   person("Ian", "Carroll", comment = "Faceting support", role = "ctb"),
@@ -25,7 +25,8 @@ Imports: miniUI,
     scales,
     stringi,
     rlang (>= 0.3.1),
-    grDevices
+    grDevices,
+    datamods
 Suggests: 
     officer,
     rvg,
@@ -36,3 +37,4 @@ Suggests:
     ggthemes,
     hrbrthemes
 VignetteBuilder: knitr
+Remotes: dreamRs/datamods
