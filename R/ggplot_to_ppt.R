@@ -80,7 +80,7 @@ ggplot_to_ppt <- function(gg = NULL) {
   } else {
 
     ui <- miniPage(
-      useShinyUtils(),
+      html_dependency_esquisse(),
       miniContentPanel(
         prettyCheckboxGroup(
           inputId = "select_gg", 

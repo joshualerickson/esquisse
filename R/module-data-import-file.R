@@ -17,7 +17,7 @@ dataImportFileUI <- function(id, dismissOnValidate = TRUE, selectVars = TRUE, co
   ns <- NS(id)
   
   tagList(
-    useShinyUtils(),
+    html_dependency_esquisse(),
     tags$script(
       sprintf("Shiny.onInputChange('%s', %f);", ns("resetImportFile"), as.numeric(Sys.time()))
     ),

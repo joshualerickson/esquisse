@@ -33,7 +33,7 @@ dataGlobalEnvUI <- function(id, dismissOnValidate = TRUE, selectVars = TRUE, coe
   info_dfs <- unlist(info_dfs)
   
   tagList(
-    useShinyUtils(),
+    html_dependency_esquisse(),
     tags$script(
       sprintf("Shiny.onInputChange('%s', %f);", ns("dataGlobalEnv"), as.numeric(Sys.time()))
     ),

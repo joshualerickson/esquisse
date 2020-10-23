@@ -32,11 +32,7 @@ chooseDataUI <- function(id,
     icon <- icon(icon)
 
   tagList(
-    singleton(
-      tags$link(rel="stylesheet", type="text/css",
-                href="esquisse/styles-dad.css")
-    ),
-    useShinyUtils(),
+    html_dependency_esquisse(),
     actionButton(
       inputId = ns("changeData"),
       label = label,

@@ -78,7 +78,7 @@ chartControlsUI <- function(id,
         value = isTRUE(disable_filters)
       )
     ),
-    useShinyUtils()
+    html_dependency_esquisse()
   )
 }
 

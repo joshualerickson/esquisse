@@ -69,7 +69,7 @@ coerceUI <- function(id) {
     tags$style(
       ".col-coerce {padding-right: 5px; padding-left: 5px;}"
     ),
-    useShinyUtils(),
+    html_dependency_esquisse(),
     column(
       width = 5, class = "col-coerce",
       pickerInput(

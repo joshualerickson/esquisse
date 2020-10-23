@@ -1,10 +1,20 @@
 
 # Utils Shiny ----
 
-#' @importFrom htmltools singleton tags
-useShinyUtils <- function() {
-  singleton(tags$head(tags$script(src = "esquisse/shiny-utils.js")))
+
+#' @importFrom htmltools htmlDependency
+#' @importFrom utils packageVersion
+html_dependency_esquisse <- function() {
+  htmlDependency(
+    name = "esquisse",
+    version = packageVersion("esquisse"),
+    src = list(href = "esquisse", file = "assets"),
+    package = "esquisse",
+    script = "js/shiny-utils.js",
+    stylesheet = c("css/styles-dad.css", "css/styles.css")
+  )
 }
+
 
 
 #' Enable or disable a Shiny input

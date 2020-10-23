@@ -8,9 +8,9 @@
  
  
 .dreamrs-title-box {
-  background-color: #112446;
-  height: 45px;
-  margin-bottom: 5px;
+  background-color: #112446 !important;
+  height: 45px !important;
+  margin-bottom: 5px !important;
 }
 
 .dreamrs-title {

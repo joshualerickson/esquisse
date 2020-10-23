@@ -5,7 +5,7 @@
 selectVarsUI <- function(id) {
   ns <- NS(id)
   tagList(
-    useShinyUtils(),
+    html_dependency_esquisse(),
     tags$script(
       sprintf("Shiny.onInputChange('%s', %f);", ns("launchSelectVars"), as.numeric(Sys.time()))
     ),
