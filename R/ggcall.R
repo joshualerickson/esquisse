@@ -21,21 +21,21 @@
 #'
 #' @return a \code{call} that can be evaluated with \code{eval}.
 #' @export
-#' 
+#'
 #' @importFrom stats setNames
 #' @importFrom rlang sym syms expr as_name is_call call2 has_length
 #' @importFrom ggplot2 ggplot aes theme facet_wrap vars coord_flip labs
 #'
 #' @example examples/ex-ggcall.R
 ggcall <- function(data = NULL,
-                   mapping = NULL, 
-                   geom = NULL, 
+                   mapping = NULL,
+                   geom = NULL,
                    geom_args = list(),
-                   scales = NULL, 
+                   scales = NULL,
                    scales_args = list(),
-                   coord = NULL, 
-                   labs = list(), 
-                   theme = NULL, 
+                   coord = NULL,
+                   labs = list(),
+                   theme = NULL,
                    theme_args = list(),
                    facet = NULL,
                    facet_row = NULL,
@@ -47,11 +47,11 @@ ggcall <- function(data = NULL,
     return(expr(ggplot()))
   data <- as.character(data)
   if (grepl("::", data)) {
-    data <- str2lang(data) 
+    data <- str2lang(data)
   } else {
     data <- sym(data)
   }
-  if (rlang::is_call(mapping)) 
+  if (rlang::is_call(mapping))
     mapping <- eval(mapping)
   mapping <- dropNulls(mapping)
   aes <- expr(aes(!!!syms2(mapping)))
@@ -132,7 +132,7 @@ ggcall <- function(data = NULL,
       ggcall <- expr(!!ggcall + !!facet)
     }
   }
-  
+
   if (has_length(xlim, 2)) {
     xlim <- expr(xlim(!!!as.list(xlim)))
     ggcall <- expr(!!ggcall + !!xlim)
@@ -141,7 +141,7 @@ ggcall <- function(data = NULL,
     ylim <- expr(ylim(!!!as.list(ylim)))
     ggcall <- expr(!!ggcall + !!ylim)
   }
-  
+
   ggcall
 }
 

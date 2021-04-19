@@ -79,7 +79,7 @@ esquisserUI <- function(id, header = TRUE,
     singleton(x = tagList(
       tags$script(src = "esquisse/clipboard/clipboard.min.js")
     )),
-    shinyWidgets::chooseSliderSkin("Modern", "#112446"),
+    shinyWidgets::chooseSliderSkin("Modern", "#787878"),
 
     if (isTRUE(header)) box_title,
 
@@ -122,7 +122,9 @@ esquisserUI <- function(id, header = TRUE,
             icon_off = icon("pause-circle-o", class = "fa-2x")
           )
         ),
-        plotOutput(outputId = ns("plooooooot"), width = "100%", height = "100%")
+        plotOutput(outputId = ns("plooooooot"), brush = 'brush',  width = "100%", height = "100%")
+        #plotOutput(outputId = ns("plooooooot"))
+
       )
     ),
 
